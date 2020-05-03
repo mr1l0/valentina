@@ -1,0 +1,48 @@
+a {
+    margin-right: 20px;
+    margin-top: 8px;
+}
+
+.body {
+    background-color: #e8b376;    
+    height: 100%;
+    width: 100%;
+}
+
+.spinner {
+    align-self: center;
+    width: 100%;
+}
+
+.card {
+    max-width: 400px;
+    max-height: 670px;
+    position: center;    
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.content-input {
+    width: 100%;
+}
+
+.centrelizer{
+    display: flex;
+    justify-content: center;
+}
+
+.header-image {
+    background-size: cover;
+}
+
+.botton-margin {
+    margin-bottom: 5px;
+}
+
+.submit-button {
+    width: 100%;
+}

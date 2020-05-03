@@ -1,0 +1,28 @@
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;  
+}
+
+.side-nav-brackground {
+  background-color: #e8b376;
+  color: white;
+  border: none;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.default-margin {
+  margin: 5px;
+}

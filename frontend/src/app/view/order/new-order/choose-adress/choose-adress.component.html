@@ -1,0 +1,10 @@
+<p>Onde devemos entregar seu pedido?</p>
+
+<app-show-adress *ngIf="order.userAdress" [userAdress]="order.userAdress"></app-show-adress>
+<p><button mat-flat-button color="primary" *ngIf="order.userAdress" (click)="changeAdress()">Trocar endereço de entrega</button></p>
+
+<app-new-adress *ngIf="!order.userAdress" [userAdresses]="userAdresses" [order]="order"></app-new-adress>
+
+<mat-divider></mat-divider>
+
+<button mat-flat-button color="primary" (click)="submit()" class="button">Finalizar Pedido</button>

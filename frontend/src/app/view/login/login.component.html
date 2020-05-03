@@ -1,0 +1,45 @@
+
+<div class="body centrelizer">
+  <mat-card class="card">
+    <img mat-card-image src="./../../assets/logo_valentina.png" alt="Valentina Salgados">
+    <mat-card-content class="content">
+
+      <form [formGroup]="loginForm" (ngSubmit)="submit(loginForm.value)" [hidden]="loading">
+
+        <mat-form-field appearance="standard" class="content-input">
+          <mat-label>Login</mat-label>
+          <input matInput autofocus formControlName="login" placeholder="Digite seu login">
+          <mat-error *ngIf="!loginForm.get('login').valid && loginForm.get('login').touched">
+            Preenchimento obrigatório
+          </mat-error>
+        </mat-form-field>    
+
+        <mat-form-field appearance="standard" class="content-input">
+          <mat-label>Senha</mat-label>
+          <input type="password" matInput formControlName="password" placeholder="Digite sua senha">
+          <mat-error *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">
+            Preenchimento obrigatório
+          </mat-error>
+
+        </mat-form-field>    
+
+        <mat-checkbox class="botton-margin" formControlName="saveUser">Manter conectado</mat-checkbox>
+                
+        <button mat-raised-button type="submit" [disabled]="!loginForm.valid" class="primary submit-button">Entrar</button>
+
+        <p>Ainda não tem cadastro? <a routerLink="/new-user">Cadastre-se aqui</a></p>
+
+      </form>
+
+      <mat-progress-spinner 
+        *ngIf="loading"
+        class="spinner"
+        [color]="color"
+        [mode]="mode">
+      </mat-progress-spinner>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</div>

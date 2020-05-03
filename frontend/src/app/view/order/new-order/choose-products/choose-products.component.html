@@ -1,0 +1,19 @@
+
+<p>
+  <mat-form-field appearance="standard">
+    <mat-label>Quantidade</mat-label>
+    <input matInput autofocus [(ngModel)]="sumAmount" name="sumAmount" (change)="changeSumAmount()">
+  </mat-form-field>
+  Valor: {{sumValue | currency:"BRL":"symbol"}}
+</p>
+<mat-divider></mat-divider>
+<p class="products" *ngFor="let orderItem of order.orderItem">
+  <mat-form-field appearance="legacy">
+    <mat-label>{{orderItem.product.name}}</mat-label>
+    <input matInput [(ngModel)]="orderItem.amount" name="amount" (change)="changeItemAmount()">
+  </mat-form-field>
+</p>
+<mat-divider></mat-divider>
+<h2> {{sumValue | currency:"BRL":"symbol"}}</h2>
+<mat-divider></mat-divider>
+<button mat-flat-button matStepperNext color="primary" class="button">Avançar</button>

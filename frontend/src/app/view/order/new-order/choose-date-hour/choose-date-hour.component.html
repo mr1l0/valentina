@@ -1,0 +1,42 @@
+<div [hidden]="!order.scheduledTo">
+  <p>Agendado para {{order.scheduledTo}}</p>
+  <button mat-flat-button (click)="clear()" color="primary" class="time-button">
+    Trocar data de entrega
+  </button>
+  <p><button mat-flat-button matStepperNext color="primary" class="button">Avançar</button></p>
+</div>
+
+<div [hidden]="order.scheduledTo">
+  <p>
+    <mat-form-field>
+      <mat-label>Data do Pedido</mat-label>
+      <input matInput autofocus [(ngModel)]="data" [matDatepicker]="picker" (dateChange)="changeDate()">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </p>
+
+
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let orderTime of orderTimes">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{orderTime.hour}}:00
+        </mat-panel-title>
+        <mat-panel-description>
+          Ver horários disponíveis
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+      <div class="time-container">
+        <div *ngFor="let minute of orderTime.minutes" >
+          <button mat-flat-button (click)="click(orderTime.hour, minute)" matStepperNext color="primary" class="time-button">
+            {{orderTime.hour}}:{{minute | formatNumber:minute}}
+          </button>
+        </div>      
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<p><button mat-flat-button matStepperPrevious>Voltar</button></p>

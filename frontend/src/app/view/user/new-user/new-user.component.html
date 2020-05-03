@@ -1,0 +1,44 @@
+<h3>
+  Criar seu usuário Valentina Salgados
+</h3>
+<p>
+  Hora de pedir o melhor salgadinho da região!
+</p>
+
+<p>
+  <mat-form-field appearance="standard">
+    <mat-label>Nome</mat-label>
+    <input matInput required [(ngModel)]="user.name" name="name" autofocus>
+  </mat-form-field>    
+</p>
+<p>
+  <mat-form-field appearance="standard">
+    <mat-label>e-mail</mat-label>
+    <input matInput [(ngModel)]="user.email" name="email">
+  </mat-form-field>    
+</p>
+<p>
+  <mat-form-field appearance="standard">
+    <mat-label>Telefone</mat-label>
+    <input type="tel" matInput required [(ngModel)]="user.cellphone" name="cellphone">
+  </mat-form-field>    
+</p>
+<p>
+  <mat-form-field appearance="standard">
+    <mat-label>Login</mat-label>
+    <input matInput required [(ngModel)]="user.login" name="login">
+  </mat-form-field>    
+</p>
+<p>
+  <mat-form-field appearance="standard">
+    <mat-label>Senha</mat-label>
+    <input type="password" matInput required [(ngModel)]="user.password" name="password" #password="matInput">
+  </mat-form-field>    
+</p>
+<p>
+  <mat-form-field appearance="standard">
+    <mat-label>Confirmar senha</mat-label>
+    <input type="password" matInput required [(ngModel)]="confirmedPassword" name="confirmedPassword">
+  </mat-form-field>    
+</p>
+<button mat-flat-button color="primary" (click)="submit()">Confirmar</button>

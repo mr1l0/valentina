@@ -1,0 +1,39 @@
+<p [hidden]="!(userAdresses?.length > 1)">Endereços cadastrados</p>
+<p [hidden]="!(userAdresses?.length == 1)">Temos um endereço cadastrado, deseja utiliza-lo?</p>
+
+<div *ngFor="let userAdress of userAdresses">
+  <app-show-adress (click)="setOrderAdress(userAdress)" [userAdress]="userAdress"></app-show-adress>
+</div>
+
+<p>Vamos cadastrar um endereço novo?</p>
+<mat-form-field appearance="standard" class="content-input">
+  <mat-label>CEP</mat-label>
+  <input matInput autofocus required (change)="findAdressByCep()" [(ngModel)]="userAdress.cep" name="cep">
+</mat-form-field>    
+
+<mat-form-field appearance="standard" class="content-input">
+  <mat-label>Endereço</mat-label>
+  <input matInput required [(ngModel)]="userAdress.street" name="street">
+</mat-form-field>    
+
+<mat-form-field appearance="standard" class="content-input">
+  <mat-label>Número</mat-label>
+  <input matInput required [(ngModel)]="userAdress.number" name="number">
+</mat-form-field>    
+
+<mat-form-field appearance="standard" class="content-input">
+  <mat-label>Cidade</mat-label>
+  <input matInput required [(ngModel)]="userAdress.city" name="city">
+</mat-form-field>    
+
+<mat-form-field appearance="standard" class="content-input">
+  <mat-label>Estado</mat-label>
+  <input matInput required [(ngModel)]="userAdress.state" name="state">
+</mat-form-field>    
+
+<mat-form-field appearance="standard" class="content-input">
+  <mat-label>Complemento</mat-label>
+  <input matInput required [(ngModel)]="userAdress.more" name="more">
+</mat-form-field>    
+
+<p><button mat-flat-button color="primary" (click)="submit()">Salvar Endereço</button></p>
