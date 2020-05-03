@@ -1,0 +1,113 @@
+import {UserController} from "./controllers/UserController";
+import { UserAdressController } from "./controllers/UserAdressController";
+import { ProductController } from "./controllers/ProductController";
+import { PriceController } from "./controllers/PriceController";
+import { OfficeHourController } from "./controllers/OfficeHourController";
+
+export const Routes = [
+//User    
+{
+    method: "get",
+    route: "/users",
+    controller: UserController,
+    action: "all"
+}, {
+    method: "get",
+    route: "/users/:id",
+    controller: UserController,
+    action: "one"
+}, {
+    method: "post",
+    route: "/users",
+    controller: UserController,
+    action: "save"    
+}, {
+    method: "delete",
+    route: "/users/:id",
+    controller: UserController,
+    action: "remove"
+},
+//Adress
+{
+    method: "get",
+    route: "/userAdress/:user_id",
+    controller: UserAdressController,
+    action: "one"
+}, {
+    method: "post",
+    route: "/userAdress",
+    controller: UserAdressController,
+    action: "save"
+},{
+    method: "delete",
+    route: "/userAdress/:id",
+    controller: UserAdressController,
+    action: "remove"
+},
+//Product    
+{
+    method: "get",
+    route: "/products",
+    controller: ProductController,
+    action: "all"
+}, {
+    method: "get",
+    route: "/products/:id",
+    controller: ProductController,
+    action: "one"
+}, {
+    method: "post",
+    route: "/products",
+    controller: ProductController,
+    action: "save"    
+}, {
+    method: "delete",
+    route: "/products/:id",
+    controller: ProductController,
+    action: "remove"
+},
+//Price    
+{
+    method: "get",
+    route: "/prices",
+    controller: PriceController,
+    action: "all"
+}, {
+    method: "get",
+    route: "/prices/:id",    
+    controller: PriceController,
+    action: "one"
+}, {
+    method: "post",
+    route: "/prices",
+    controller: PriceController,
+    action: "save"    
+}, {
+    method: "delete",
+    route: "/prices/:id",
+    controller: PriceController,
+    action: "remove"
+},
+//OfficeHour    
+{
+    method: "get",
+    route: "/officehour",
+    controller: OfficeHourController,
+    action: "all"
+}, {
+    method: "get",
+    route: "/officehour/:id",
+    controller: OfficeHourController,
+    action: "one"
+}, {
+    method: "post",
+    route: "/officehour",
+    controller: OfficeHourController,
+    action: "save"    
+}, {
+    method: "delete",
+    route: "/officehour/:id",
+    controller: OfficeHourController,
+    action: "remove"
+}
+];
