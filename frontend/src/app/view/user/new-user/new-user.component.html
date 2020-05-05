@@ -38,14 +38,12 @@
           <mat-icon matPrefix class="color-primary">verified_user</mat-icon>          
           <mat-label>Usuário</mat-label>
           <input matInput formControlName="login" (change)="verifyLogin(newUserForm.get('login').value)">
+          <mat-icon matSuffix *ngIf="userVerified" color="warn">report_problem</mat-icon>          
           <mat-error *ngIf="(!newUserForm.controls['login'].valid) && newUserForm.controls['login'].touched">
             {{campoObrigatorioMin3}}
           </mat-error>          
-          <mat-error *ngIf="userVerified">
-            Usuário já cadastrado!
-          </mat-error>      // continuar aqui!    
-        </mat-form-field>    
-        Usuário existe? {{userVerified}}
+          <mat-hint *ngIf="userVerified" color="warn">Usuário já existe!</mat-hint>
+        </mat-form-field>            
 
         <mat-form-field appearance="standard" class="full-input">
           <mat-icon matPrefix class="color-primary">vpn_key</mat-icon>
@@ -65,7 +63,7 @@
           </mat-error>
         </mat-form-field>    
 
-        <button mat-flat-button [disabled]="!newUserForm.valid" class="primary full-input">Confirmar</button>
+        <button mat-flat-button [disabled]="!newUserForm.valid || userVerified" class="primary full-input">Confirmar</button>
         <p>Já tem um cadastro? <a routerLink="/login">Clique aqui</a></p>
 
       </form>

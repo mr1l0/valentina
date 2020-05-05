@@ -4,6 +4,7 @@ import { User } from 'src/app/model/user';
 import { MatSnackBar, MatInput, ThemePalette, ProgressSpinnerMode } from '@angular/material';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-user',
@@ -31,7 +32,8 @@ export class NewUserComponent implements OnInit {
     protected userService: UserService,
     private _snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -39,7 +41,7 @@ export class NewUserComponent implements OnInit {
   }
 
   createForm() {    
-    this.user.type = 'Cliente';
+    
     let emailregex: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
     this.newUserForm = this.formBuilder.group({      
@@ -99,6 +101,7 @@ export class NewUserComponent implements OnInit {
     }    
     
     this.user = user;
+    this.user.type = 'Cliente';
 
     this.userService.upsertUser(this.user).subscribe(user => {
       this._snackBar.open('Usuário cadastrado com sucesso, entrando no sistema...', '', { 
@@ -106,8 +109,8 @@ export class NewUserComponent implements OnInit {
         verticalPosition: 'top'
       });      
 
-      //alert('Usuário cadastrado, não esqueça de autenticar e logar automatico nesse ponto Murilão!');
-      this.loading = false;
+      this.authService.auth(this.user, true).subscribe(user => this.router.navigate(["/home"]));
+            
     }, 
     error => {
       console.log('Erro ao cadastrar usuário -> ' + error);
