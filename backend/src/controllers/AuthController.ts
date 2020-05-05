@@ -7,6 +7,21 @@ import { User } from "../entity/User";
 import config from "../config/config";
 
 class AuthController {
+
+  static verify = async (req: Request, res: Response) => {
+    let { login } = req.params;
+
+    const userRepository = getRepository(User);
+    
+    try{
+      let user: User = await userRepository.findOneOrFail( { where: { login }});
+      return res.send(true);
+    }catch{
+      return res.send(false);
+    }
+    
+  }
+
   static login = async (req: Request, res: Response) => {
     //Check if username and password are set
     let { login, password } = req.body;

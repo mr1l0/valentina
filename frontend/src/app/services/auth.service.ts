@@ -18,7 +18,9 @@ export class AuthService {
   }
 
   user: User;
-  url: string = 'http://localhost:3000/auth/login';  
+  url: string = 'http://localhost:3000/auth/'
+  urlLogin: string = this.url + 'login';  
+  urlVerify: string = this.url + 'verify/';
 
   showMenu = new EventEmitter<boolean>();
 
@@ -29,7 +31,7 @@ export class AuthService {
 
   auth(user: User, saveUser: boolean): Observable<User> {
     console.log(user);
-    return this.httpClient.post<User>(this.url, user).pipe(tap(user => {
+    return this.httpClient.post<User>(this.urlLogin, user).pipe(tap(user => {
       this.user = user;
       if (saveUser) {
         this.user.login = '';
@@ -38,6 +40,10 @@ export class AuthService {
       }      
       this.showMenu.emit(true);
     }));
+  }
+
+  vevrify(login: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(this.urlVerify + login);
   }
 
   getLoggedUser() {

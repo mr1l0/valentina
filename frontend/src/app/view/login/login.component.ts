@@ -5,7 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
-import { ThemePalette, ProgressSpinnerMode } from '@angular/material';
+import { ThemePalette, ProgressSpinnerMode, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
     public authService: AuthService,
     protected userService: UserService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar,    
   ) { }
 
   ngOnInit() {
@@ -58,18 +59,25 @@ export class LoginComponent implements OnInit {
 
   }
 
-  submit(user: User) {
-    try{
-      this.loading = true;
-      this.user = user;
-      this.authService.auth(this.user, this.saveUser).subscribe(user => {           
-        
-        this.router.navigateByUrl("/main");
+  submit(user: User) {    
+    this.loading = true;
+    this.user = user;
+    this.authService.auth(this.user, this.saveUser).subscribe(user => {           
+      
+      this.router.navigate(["/home"]);
+      
+    },
+    error => {
 
-      })
-    }finally{
+      console.log('Erro ao authenticar usuário -> ' + error);
+      this._snackBar.open('Tivemos um problema com a authenticação, verifique sua internet e tente novamente', '', { 
+        duration: 7000,
+        verticalPosition: 'top'
+      });       
+
       this.loading = false;
-    }
+    })
+      
   }
 
 }

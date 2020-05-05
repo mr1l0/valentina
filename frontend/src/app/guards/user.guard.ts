@@ -16,6 +16,7 @@ export class UserGuard implements CanActivate, CanActivateChild, CanLoad {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean | UrlTree {
+      
     let token: string;
     if(this.authService.getLoggedUser()) {
       token = this.authService.getLoggedUser().token;

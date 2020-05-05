@@ -3,20 +3,16 @@ a {
     margin-top: 8px;
 }
 
-.body {
-    background-color: #e8b376;    
-    height: 100%;
-    width: 100%;
-}
-
 .spinner {
     align-self: center;
     width: 100%;
+    margin-top: 20%;
 }
 
 .card {
     max-width: 400px;
     max-height: 670px;
+    width: 670px;
     position: center;    
 }
 
@@ -28,11 +24,6 @@ a {
 
 .content-input {
     width: 100%;
-}
-
-.centrelizer{
-    display: flex;
-    justify-content: center;
 }
 
 .header-image {

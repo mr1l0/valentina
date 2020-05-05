@@ -1,44 +1,82 @@
-<h3>
-  Criar seu usuário Valentina Salgados
-</h3>
-<p>
-  Hora de pedir o melhor salgadinho da região!
-</p>
+<div class="full-brackground centrelizer">
+  <mat-card class="card">    
+    <mat-card-content class="content">
+      <mat-card-header class="primary full-size">      
+        <h2>Seja bem vindo a Valentina Salgados!</h2>
+      </mat-card-header>
+      
+      <form [formGroup]="newUserForm" (ngSubmit)="submit(newUserForm.value)" [hidden]="loading">
+        <p>Hora de pedir o melhor salgadinho da região!</p>        
+        <mat-form-field appearance="standard" class="full-input">
+          <mat-icon matPrefix class="color-primary">account_circle</mat-icon>
+          <mat-label>Nome</mat-label>
+          <input matInput autofocus formControlName="name">
+          <mat-error *ngIf="!newUserForm.controls['name'].valid && newUserForm.controls['name'].touched">
+            {{campoObrigatorioMin3}}
+          </mat-error>
+        </mat-form-field>    
 
-<p>
-  <mat-form-field appearance="standard">
-    <mat-label>Nome</mat-label>
-    <input matInput required [(ngModel)]="user.name" name="name" autofocus>
-  </mat-form-field>    
-</p>
-<p>
-  <mat-form-field appearance="standard">
-    <mat-label>e-mail</mat-label>
-    <input matInput [(ngModel)]="user.email" name="email">
-  </mat-form-field>    
-</p>
-<p>
-  <mat-form-field appearance="standard">
-    <mat-label>Telefone</mat-label>
-    <input type="tel" matInput required [(ngModel)]="user.cellphone" name="cellphone">
-  </mat-form-field>    
-</p>
-<p>
-  <mat-form-field appearance="standard">
-    <mat-label>Login</mat-label>
-    <input matInput required [(ngModel)]="user.login" name="login">
-  </mat-form-field>    
-</p>
-<p>
-  <mat-form-field appearance="standard">
-    <mat-label>Senha</mat-label>
-    <input type="password" matInput required [(ngModel)]="user.password" name="password" #password="matInput">
-  </mat-form-field>    
-</p>
-<p>
-  <mat-form-field appearance="standard">
-    <mat-label>Confirmar senha</mat-label>
-    <input type="password" matInput required [(ngModel)]="confirmedPassword" name="confirmedPassword">
-  </mat-form-field>    
-</p>
-<button mat-flat-button color="primary" (click)="submit()">Confirmar</button>
+        <mat-form-field appearance="standard" class="full-input">
+          <mat-icon matPrefix class="color-primary">alternate_email</mat-icon>
+          <mat-label>e-mail</mat-label>
+          <input matInput formControlName="email">
+          <mat-error *ngIf="!newUserForm.controls['email'].valid && newUserForm.controls['email'].touched">
+            Digite um e-mail válido!
+          </mat-error>
+        </mat-form-field>    
+
+        <mat-form-field appearance="standard" class="full-input">
+          <mat-icon matPrefix class="color-primary">phone</mat-icon>
+          <mat-label>Telefone</mat-label>
+          <input type="tel" matInput formControlName="cellphone" [textMask]="{mask: phoneMask}" >
+          <mat-error *ngIf="!newUserForm.controls['cellphone'].valid && newUserForm.controls['cellphone'].touched">
+            {{campoObrigatorioMin3}}
+          </mat-error>
+        </mat-form-field>    
+
+        <mat-form-field appearance="standard" class="full-input">
+          <mat-icon matPrefix class="color-primary">verified_user</mat-icon>          
+          <mat-label>Usuário</mat-label>
+          <input matInput formControlName="login" (change)="verifyLogin(newUserForm.get('login').value)">
+          <mat-error *ngIf="(!newUserForm.controls['login'].valid) && newUserForm.controls['login'].touched">
+            {{campoObrigatorioMin3}}
+          </mat-error>          
+          <mat-error *ngIf="userVerified">
+            Usuário já cadastrado!
+          </mat-error>      // continuar aqui!    
+        </mat-form-field>    
+        Usuário existe? {{userVerified}}
+
+        <mat-form-field appearance="standard" class="full-input">
+          <mat-icon matPrefix class="color-primary">vpn_key</mat-icon>
+          <mat-label>Senha</mat-label>
+          <input type="password" matInput formControlName="password" #password="matInput">
+          <mat-error *ngIf="!newUserForm.controls['password'].valid && newUserForm.controls['password'].touched">
+            {{campoObrigatorioMin3}}
+          </mat-error>
+        </mat-form-field>    
+        
+        <mat-form-field appearance="standard" class="full-input">
+          <mat-icon matPrefix class="color-primary">vpn_key</mat-icon>
+          <mat-label>Confirmar senha</mat-label>
+          <input type="password" matInput formControlName="confirmedPassword">
+          <mat-error *ngIf="!newUserForm.controls['confirmedPassword'].valid && newUserForm.controls['confirmedPassword'].touched">
+            {{campoObrigatorioMin3}}
+          </mat-error>
+        </mat-form-field>    
+
+        <button mat-flat-button [disabled]="!newUserForm.valid" class="primary full-input">Confirmar</button>
+        <p>Já tem um cadastro? <a routerLink="/login">Clique aqui</a></p>
+
+      </form>
+      
+      <mat-progress-spinner           
+        *ngIf="loading"
+        class="spinner"
+        [color]="color"
+        [mode]="mode">
+      </mat-progress-spinner>
+      
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -13,6 +13,7 @@ import { ChooseAdressComponent } from "./order/new-order/choose-adress/choose-ad
 import { NewAdressComponent } from "./order/new-order/choose-adress/new-adress/new-adress.component";
 import { ShowAdressComponent } from "./order/new-order/choose-adress/show-adress/show-adress.component";
 import { SharedModule } from "src/app/shared/shared.module";
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SharedModule } from "src/app/shared/shared.module";
     ChooseAdressComponent,
     NewAdressComponent,
     ShowAdressComponent,
+    HomePageComponent,
   ],
-  imports: [CommonModule, HomeRoutingModule, SharedModule],
+  imports: [SharedModule, CommonModule, HomeRoutingModule],
 })
 export class HomeModule {}

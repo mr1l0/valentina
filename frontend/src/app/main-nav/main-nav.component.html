@@ -5,16 +5,15 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">      
 
-    <!--div *ngIf="showMenu" class="side-nav-brackground"-->
-      <mat-toolbar>Menu</mat-toolbar>
-      <mat-divider></mat-divider>
-      <mat-nav-list>
-        <a mat-list-item [routerLink]="['/main']">Início</a>
-        <a mat-list-item [routerLink]="['/main/new-request']">Novo Pedido</a>
-        <a mat-list-item [routerLink]="['/main/my-requests']">Meus Pedidos</a>
-        <a mat-list-item (click)="logout()">Sair</a>
-      </mat-nav-list>
-    <!--/div-->
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-divider></mat-divider>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/']">Início</a>
+      <a mat-list-item [routerLink]="['/new-request']">Novo Pedido</a>
+      <a mat-list-item [routerLink]="['/my-requests']">Meus Pedidos</a>
+      <a mat-list-item (click)="logout()">Sair</a>
+    </mat-nav-list>
+    
     </mat-sidenav>    
   <mat-sidenav-content>
     <!-- *ngIf="showMenu" -->

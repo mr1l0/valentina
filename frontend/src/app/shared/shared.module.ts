@@ -25,11 +25,39 @@ import { BrowserModule } from "@angular/platform-browser";
 import { LayoutModule } from "@angular/cdk/layout";
 import { HttpClientModule } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
-import { JwtModule } from "@auth0/angular-jwt";
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule, 
+    FormsModule,
+    RouterModule,
+    AppRoutingModule,
+    MatCommonModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatCardModule,    
+    MatCheckboxModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatProgressSpinnerModule,
+    MatCommonModule,
+    MatSidenavModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    LayoutModule,
+    HttpClientModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatExpansionModule,
+    MatListModule,
+    MatSnackBarModule,
+    TextMaskModule
+  ],
   exports: [
     CommonModule,
     RouterModule,
@@ -57,12 +85,7 @@ import { JwtModule } from "@auth0/angular-jwt";
     MatExpansionModule,
     MatListModule,
     MatSnackBarModule,
-    // JwtModule.forRoot({
-    //   config: {
-    //     tokenGetter: function  tokenGetter() {
-    //       return     localStorage.getItem('access_token');}
-    //   }
-    // })
-  ],
+    TextMaskModule
+  ]
 })
 export class SharedModule {}

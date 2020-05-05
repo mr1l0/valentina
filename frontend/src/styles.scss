@@ -9,4 +9,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .light-primary {
     color: #e8b376;
 }
+.color-primary {
+    color: #db8f39;
+}
+
+.full-brackground {
+    background-color: #e8b376;    
+    height: 100%;
+    width: 100%;
+}
+
+.full-input {
+    width: 100%;
+}
+
+.centrelizer{
+    display: flex;
+    justify-content: center;
+}
 
