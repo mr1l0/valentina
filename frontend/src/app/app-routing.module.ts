@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "new-user", component: NewUserComponent },
   {
-    path: "main",
+    path: "home",
     canActivate: [UserGuard],
     loadChildren: () =>
       import("./view/home/home.module").then((m) => m.HomeModule),
