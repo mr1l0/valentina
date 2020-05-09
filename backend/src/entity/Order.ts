@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, JoinColumn, UpdateDateColumn, CreateDateColumn, Index, ManyToMany} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, JoinColumn, UpdateDateColumn, CreateDateColumn, Index, ManyToMany, ManyToOne} from "typeorm";
 import { UserAdress } from "./UserAdress";
 import { OrderItem } from "./OrderItem";
 import { User } from "./User";
@@ -15,12 +15,10 @@ export class Order {
     @Column()
     scheduledTo: Date;
 
-    @ManyToMany(type => User)
-    @JoinColumn()
+    @ManyToOne(type => User, user => user.order)    
     user: User;
 
-    @ManyToMany(type => UserAdress)
-    @JoinColumn()
+    @ManyToOne(type => UserAdress, userAdress => userAdress.order)    
     userAdress: UserAdress;
 
     @OneToMany(type => OrderItem, OrderItem => OrderItem.order)

@@ -1,7 +1,8 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany, ManyToOne} from "typeorm";
 import { Group } from "./Group";
 import { UserAdress } from "./UserAdress";
 import * as bcrypt from "bcryptjs";
+import { Order } from "./Order";
 
 @Entity()
 export class User {
@@ -33,6 +34,10 @@ export class User {
     @ManyToMany(type => Group)
     @JoinTable()
     categories: Group[];
+
+    @OneToMany(type => Order, order => order.user)
+    order: Order[];
+
 
     token: string;
 

@@ -1,5 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany} from "typeorm";
 import { User } from "./User";
+import { Order } from "./Order";
 
 @Entity()
 export class UserAdress {
@@ -27,4 +28,7 @@ export class UserAdress {
 
     @ManyToOne(type => User, user => user.Adresses)
     user: User;
+
+    @OneToMany(type => Order, order => order.userAdress)
+    order: Order[];
 }

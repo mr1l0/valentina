@@ -5,7 +5,7 @@ import { LoginComponent } from "./view/login/login.component";
 import { UserGuard } from "./guards/user.guard";
 
 const routes: Routes = [
-  { path: "", pathMatch: "full", redirectTo: "login" },
+  { path: "", pathMatch: "full", redirectTo: "home" },
   { path: "login", component: LoginComponent },
   { path: "new-user", component: NewUserComponent },
   {

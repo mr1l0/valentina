@@ -8,9 +8,27 @@
 }
 
 .side-nav-brackground {
+  background-color: white;
+  color: black;  
+}
+
+.menu {
+  background-color: #db8f39!important;
+  background: #db8f39!important;
+  color: white;  
+}
+
+.simple-logo {  
+  padding: 10;
+  margin-left: 50px;  
+  margin-top: 20px;
+  max-height: 50px;
+  max-width: 50px;
+}
+
+.side-menu {
   background-color: #e8b376;
-  color: white;
-  border: none;
+  color: black;
 }
 
 .sidenav .mat-toolbar {

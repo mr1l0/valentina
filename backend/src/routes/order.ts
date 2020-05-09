@@ -4,7 +4,7 @@ import { OrderController } from "../controllers/OrderController";
 
   const router = Router();
 
-  router.get("/", [checkJwt], OrderController.all);
+  router.get("/:user_id", [checkJwt], OrderController.all);
 
   router.get(
     "/:id",

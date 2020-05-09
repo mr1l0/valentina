@@ -19,7 +19,7 @@ export class DefaultService {
   headers: new HttpHeaders({ 
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',  
-    Authorization: this.authService.user.token//`${localStorage.getItem('access_token')} `, 
+    Authorization: this.authService.getLoggedUser().token//`${localStorage.getItem('access_token')} `, 
   })
 }
 

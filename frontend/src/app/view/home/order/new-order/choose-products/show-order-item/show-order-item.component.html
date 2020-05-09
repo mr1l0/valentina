@@ -1,0 +1,4 @@
+<mat-form-field appearance="legacy">
+  <mat-label>{{orderItem.product.name}}</mat-label>
+  <input matInput [(ngModel)]="orderItem.amount" name="amount" (change)="changeItemAmount()">
+</mat-form-field>

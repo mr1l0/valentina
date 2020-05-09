@@ -1,3 +1,38 @@
-<p>
-  my-requests works!
-</p>
+<mat-card class="card">    
+  <mat-card-header class="second full-size">      
+    <h3>Aqui estão seus pedidos!</h3>
+  </mat-card-header>
+  <mat-card-content class="content">
+    <mat-accordion>
+
+      <mat-expansion-panel *ngFor="let order of orders">
+
+        <!--app-show-order [order]="order"></app-show-order-->
+        <mat-expansion-panel-header>
+
+          <mat-panel-title>
+            {{order.scheduledTo  | date: 'dd/MM/yyyy hh:mm'}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{order.state}}
+          </mat-panel-description>
+        
+        </mat-expansion-panel-header>
+        
+        <mat-divider></mat-divider>
+        
+        <app-show-adress *ngIf="order.userAdress" [userAdress]="order.userAdress"></app-show-adress>
+        
+        <h3>Produtos</h3>
+        
+        <p *ngFor="let orderItem of order.orderItem">
+          {{orderItem.product.name}}: {{orderItem.amount}}
+        </p>
+        
+
+      </mat-expansion-panel>
+
+    </mat-accordion>
+    <button mat-flat-button class="primary full-input" [routerLink]="['/new-request']">Bora pedir salgadinho? Clique aqui</button>
+  </mat-card-content>
+</mat-card>

@@ -25,7 +25,7 @@ export class UserGuard implements CanActivate, CanActivateChild, CanLoad {
     if((token !== '')&&(token !== undefined)){
       return true;
     }else{
-      return this.router.parseUrl("login");
+      return this.router.navigate(["/home"]);
     }
   }  
   

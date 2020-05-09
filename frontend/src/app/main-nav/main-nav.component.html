@@ -1,14 +1,16 @@
 <mat-sidenav-container class="sidenav-container">   
 
-  <mat-sidenav #drawer class="side-nav-brackground sidenav" fixedInViewport="true"
+  <mat-sidenav #drawer class="side-menu sidenav" fixedInViewport="true"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">      
 
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar class="menu"><br>
+      <img mat-card-image src="./../../assets/logo_simples.png" alt="Valentina Salgados" class="simple-logo">
+    </mat-toolbar>
     <mat-divider></mat-divider>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/']">Início</a>
+      <a mat-list-item [routerLink]="['/home']">Início</a>
       <a mat-list-item [routerLink]="['/new-request']">Novo Pedido</a>
       <a mat-list-item [routerLink]="['/my-requests']">Meus Pedidos</a>
       <a mat-list-item (click)="logout()">Sair</a>
@@ -17,7 +19,7 @@
     </mat-sidenav>    
   <mat-sidenav-content>
     <!-- *ngIf="showMenu" -->
-    <mat-toolbar class="primary">
+    <mat-toolbar color="primary">
 
       <button
         type="button"

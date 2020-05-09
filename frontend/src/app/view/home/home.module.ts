@@ -14,6 +14,8 @@ import { NewAdressComponent } from "./order/new-order/choose-adress/new-adress/n
 import { ShowAdressComponent } from "./order/new-order/choose-adress/show-adress/show-adress.component";
 import { SharedModule } from "src/app/shared/shared.module";
 import { HomePageComponent } from './home-page/home-page.component';
+import { ShowOrderComponent } from './order/show-order/show-order.component';
+import { ShowOrderItemComponent } from './order/new-order/choose-products/show-order-item/show-order-item.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     NewAdressComponent,
     ShowAdressComponent,
     HomePageComponent,
+    ShowOrderComponent,
+    ShowOrderItemComponent
   ],
   imports: [SharedModule, CommonModule, HomeRoutingModule],
 })

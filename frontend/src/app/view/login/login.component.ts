@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
   submit(user: User) {    
     this.loading = true;
     this.user = user;
-    this.authService.auth(this.user, this.saveUser).subscribe(user => {           
+    this.authService.auth(this.user, this.loginForm.get('saveUser').value).subscribe(user => {           
       
       this.router.navigate(["/home"]);
       

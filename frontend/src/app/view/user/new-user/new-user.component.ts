@@ -109,7 +109,7 @@ export class NewUserComponent implements OnInit {
         verticalPosition: 'top'
       });      
 
-      this.authService.auth(this.user, true).subscribe(user => this.router.navigate(["/home"]));
+      this.authService.auth(this.user, true).subscribe(user => this.router.navigate(["/new-request"]));
             
     }, 
     error => {

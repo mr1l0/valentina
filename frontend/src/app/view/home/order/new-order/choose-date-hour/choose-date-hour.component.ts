@@ -3,11 +3,13 @@ import { OfficeHourService } from 'src/app/services/office-hour.service';
 import { OfficeHour } from 'src/app/model/office-hour';
 import { OrderTime } from 'src/app/model/order-time';
 import { Order } from 'src/app/model/order';
+import { MatExpansionPanel } from '@angular/material';
 
 @Component({
   selector: 'app-choose-date-hour',
   templateUrl: './choose-date-hour.component.html',
-  styleUrls: ['./choose-date-hour.component.scss']
+  styleUrls: ['./choose-date-hour.component.scss'],
+  viewProviders: [MatExpansionPanel]
 })
 export class ChooseDateHourComponent implements OnInit {
 

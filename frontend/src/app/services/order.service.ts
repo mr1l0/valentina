@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { DefaultService } from './default.service';
 import { Order } from '../model/order';
-import { catchError } from 'rxjs/operators';
+import { catchError, retry } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -25,9 +25,15 @@ export class OrderService extends DefaultService {
     return super.getUrl() + 'orders';
   }
 
+  getAll(): Observable<Order[]> {
+    return this.httpClient.get<Order[]>(this.getUrl() + '/' + this.authService.getLoggedUser().id, this.httpOptions).pipe(
+      retry(2),
+      catchError(this.handleError)
+    );
+  }
+
   upsert(order: Order): Observable<Order> {
-    return this.httpClient.post<Order>(this.getUrl(), order, this.httpOptions).pipe(
-      //retry(2),
+    return this.httpClient.post<Order>(this.getUrl(), order, this.httpOptions).pipe(      
       catchError(this.handleError)
     )
   }

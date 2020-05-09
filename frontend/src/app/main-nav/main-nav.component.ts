@@ -9,9 +9,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './main-nav.component.html',
   styleUrls: ['./main-nav.component.css']
 })
-export class MainNavComponent {
-
-  showMenu: boolean = false;  
+export class MainNavComponent {  
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -24,7 +22,7 @@ export class MainNavComponent {
   ) {}
 
   ngOnInit() {    
-    this.authService.showMenu.subscribe(showMenu => this.showMenu = showMenu);
+    
   }
 
   logout() {

@@ -1,15 +1,32 @@
- <h3>Novo Pedido</h3>
+
 <mat-horizontal-stepper [linear]="isLinear" #stepper>
+
   <mat-step>
-    <ng-template matStepLabel>O que?</ng-template>
+    <ng-template matStepLabel class="primary">
+      <mat-icon>restaurant</mat-icon>      
+    </ng-template>
     <app-choose-products [order]="order"></app-choose-products>
   </mat-step>
+
   <mat-step >
-    <ng-template matStepLabel>Quando?</ng-template>
+    <ng-template matStepLabel>
+      <mat-icon>local_bar</mat-icon>      
+    </ng-template>
+    Alguma bebida senhor? 
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>
+      <mat-icon>event</mat-icon>      
+    </ng-template>
     <app-choose-date-hour [order]="order"></app-choose-date-hour>
   </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Onde?</ng-template>
+
+  <mat-step>    
+    <ng-template matStepLabel>
+      <mat-icon>where_to_vote</mat-icon>      
+    </ng-template>
     <app-choose-adress [order]="order"></app-choose-adress>
   </mat-step>
+
 </mat-horizontal-stepper>

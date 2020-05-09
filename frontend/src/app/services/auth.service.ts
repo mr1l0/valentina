@@ -20,9 +20,7 @@ export class AuthService {
   user: User;
   url: string = 'http://localhost:3000/auth/'
   urlLogin: string = this.url + 'login';  
-  urlVerify: string = this.url + 'verify/';
-
-  showMenu = new EventEmitter<boolean>();
+  urlVerify: string = this.url + 'verify/';  
 
   constructor(
     private httpClient: HttpClient,
@@ -37,8 +35,7 @@ export class AuthService {
         this.user.login = '';
         this.user.password = '';
         localStorage.setItem('user_info', JSON.stringify(this.user));
-      }      
-      this.showMenu.emit(true);
+      }            
     }));
   }
 
@@ -53,18 +50,16 @@ export class AuthService {
         this.user = JSON.parse(strUser);
       }
     }    
-    if(this.user) {      
-      this.showMenu.emit(true);
+    if(this.user){
       return this.user;
-    } 
+    }
+     
     this.logout();
-    
   }
 
   logout() {
     this.user = undefined;
-    localStorage.removeItem('user_info');    
-    this.showMenu.emit(false);
+    localStorage.removeItem('user_info');        
     this.router.navigateByUrl("/login");
     console.log('mas vc mandou sair tio');
   }

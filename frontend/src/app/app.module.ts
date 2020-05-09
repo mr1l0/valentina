@@ -6,7 +6,6 @@ import { LoginComponent } from "./view/login/login.component";
 import { JwtModule } from "@auth0/angular-jwt";
 import { HomeModule } from "./view/home/home.module";
 import { SharedModule } from "./shared/shared.module";
-import { RouterModule } from "@angular/router";
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, NewUserComponent],
@@ -17,9 +16,9 @@ import { RouterModule } from "@angular/router";
       config: {
         tokenGetter: function tokenGetter() {
           return localStorage.getItem("access_token");
-        },
-      },
-    }),
+        }
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],

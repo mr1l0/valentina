@@ -1,4 +1,5 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne} from "typeorm";
+import { OrderItem } from "./OrderItem";
 
 @Entity()
 export class Product {
@@ -20,5 +21,8 @@ export class Product {
 
     @Column()
     updatedAt?: Date;
+
+    @ManyToOne(type => OrderItem, orderItem => orderItem.product)
+    orderItem: OrderItem[];
 
 }
