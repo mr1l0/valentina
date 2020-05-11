@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/model/order';
 import { AuthService } from 'src/app/services/auth.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-new-order',
@@ -10,11 +11,17 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NewOrderComponent implements OnInit {
 
   isLinear = false;
-  order: Order = {};
+  order: Order = {};  
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService    
+  ) { }
 
   ngOnInit() {
+    this.createForm();
+  }
+  
+  createForm() {
     this.order.userAdress = {};
     this.order.state = 'Agendado';
     this.order.user = this.authService.getLoggedUser();

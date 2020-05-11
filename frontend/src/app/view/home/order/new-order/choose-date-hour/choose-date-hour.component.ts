@@ -27,7 +27,7 @@ export class ChooseDateHourComponent implements OnInit {
   }
 
   getOfficeHours() {
-    this.officeHourService.getAll().subscribe(officeHours => {this.officeHours = officeHours; console.log(this.officeHours)});
+    this.officeHourService.getAll().subscribe(officeHours => this.officeHours = officeHours);
   }
 
   changeDate() {

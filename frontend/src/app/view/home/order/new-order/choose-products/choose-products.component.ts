@@ -5,6 +5,8 @@ import { ProductService } from 'src/app/services/product.service';
 import { OrderItem } from 'src/app/model/order-item';
 import { Price } from 'src/app/model/price';
 import { PriceService } from 'src/app/services/price.service';
+import { OrderService } from 'src/app/services/order.service';
+import { CalcSumBy } from 'src/app/enum/order/calc-sum-by.enum';
 
 @Component({
   selector: 'app-choose-products',
@@ -16,19 +18,34 @@ export class ChooseProductsComponent implements OnInit {
   @Input() order: Order;
 
   products: Product[];
-  prices: Price[];
+  prices: Price[];  
 
-  sumAmount: number = 0;
-  sumValue: number = 0;
+  loaded = false;
 
   constructor(
     public productService: ProductService,
-    public priceService: PriceService
+    public priceService: PriceService,
+    public orderService: OrderService
   ) { } 
 
   ngOnInit() {
-    this.getPrices();
-    this.getOrderItens();
+    this.loadData();
+  }
+  
+  async loadData() {
+    
+    this.orderService.calc.subscribe(async calcSumBy =>{
+      if(calcSumBy == CalcSumBy.itemAmount){
+        await this.changeItemAmount();
+      }else if(calcSumBy == CalcSumBy.sumAmount) {
+        await this.changeSumAmount();
+      }
+      this.order.sumValue = this.calcPrice();
+    });
+    
+    await this.getPrices();
+    await this.getOrderItens();
+    this.loaded = true;
   }
 
   getPrices() {    
@@ -40,17 +57,17 @@ export class ChooseProductsComponent implements OnInit {
 
     let calcValue: number = 0;    
     this.prices.forEach(price => {      
-      if(this.sumAmount >= price.amount)
+      if(this.order.sumAmount >= price.amount)
         if(0 == calcValue){
           calcValue = price.value;
         }        
     });      
-    return Number((this.sumAmount * calcValue).toFixed(2));;
+    return Number((Number(this.order.sumAmount) * calcValue).toFixed(2));;
   }
 
   getOrderItens() {
     this.order.orderItem = [];
-    this.productService.getAll().subscribe(( products: Product[] ) => {            
+    this.productService.getAll().subscribe(products => {            
       products.map((product: Product) => {
         const orderItem: OrderItem = {
           product,
@@ -58,20 +75,28 @@ export class ChooseProductsComponent implements OnInit {
         };
         this.order.orderItem.push(orderItem);
       });
-      this.sumAmount = 100;
-      this.changeSumAmount();  
+      this.order.sumAmount = 100;
+      this.orderService.calc.emit(CalcSumBy.sumAmount);
     });    
+  }  
+
+  onChangeSumAmount() {
+    this.orderService.calc.emit(CalcSumBy.sumAmount);
   }
 
-  changeItemAmount() {    
-    this.sumAmount = this.order.orderItem.reduce((total, valor) => Number(total) + Number(valor.amount), 0);
-    this.sumValue = this.calcPrice();
+  changeItemAmount() {        
+    this.order.sumAmount = this.order.orderItem.reduce((total, valor) => Number(total) + Number(valor.amount), 0);    
   }
 
   changeSumAmount() {
-    let productAmount = Number((this.sumAmount / this.order.orderItem.length).toFixed(0));
-    this.order.orderItem.map(orderItem => orderItem.amount = productAmount);
-    this.sumValue = this.calcPrice();
+    if (this.order.sumAmount < 20) {
+      this.order.sumAmount = 20;
+    }
+    let productAmount = Number((Number(this.order.sumAmount) / this.order.orderItem.length).toFixed(0));
+    this.order.orderItem.map(orderItem => orderItem.amount = productAmount);   
+    if (this.order.orderItem.reduce((total, valor) => Number(total) + Number(valor.amount), 0) < this.order.sumAmount) {
+      this.order.orderItem[0].amount = this.order.orderItem[0].amount + (Number(this.order.sumAmount) - this.order.orderItem.reduce((total, valor) => Number(total) + Number(valor.amount), 0));
+    }
   }
 
   next() {

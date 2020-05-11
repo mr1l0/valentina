@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
@@ -6,11 +6,15 @@ import { DefaultService } from './default.service';
 import { Order } from '../model/order';
 import { catchError, retry } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { CalcSumBy } from '../enum/order/calc-sum-by.enum';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService extends DefaultService {
+
+  calc: EventEmitter<CalcSumBy> = new EventEmitter();
 
   constructor(
     public httpClient: HttpClient,  

@@ -1,32 +1,41 @@
+<div class="content">
+  <mat-card class="card">    
+    <mat-card-content class="content">
+      <mat-card-header class="full-size">      
+        <h2>Hora de pedir um delicioso salgado!</h2>
+      </mat-card-header>
+      <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        
+        <mat-step>
+          <ng-template matStepLabel class="primary">
+            <mat-icon>restaurant</mat-icon>      
+          </ng-template>
+            
+          <app-choose-products [order]="order"></app-choose-products>
+        </mat-step>
 
-<mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step >
+          <ng-template matStepLabel>
+            <mat-icon>local_bar</mat-icon>      
+          </ng-template>
+          Alguma bebida senhor? 
+        </mat-step>
 
-  <mat-step>
-    <ng-template matStepLabel class="primary">
-      <mat-icon>restaurant</mat-icon>      
-    </ng-template>
-    <app-choose-products [order]="order"></app-choose-products>
-  </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>
+            <mat-icon>event</mat-icon>      
+          </ng-template>
+          <app-choose-date-hour [order]="order"></app-choose-date-hour>
+        </mat-step>
 
-  <mat-step >
-    <ng-template matStepLabel>
-      <mat-icon>local_bar</mat-icon>      
-    </ng-template>
-    Alguma bebida senhor? 
-  </mat-step>
+        <mat-step>    
+          <ng-template matStepLabel>
+            <mat-icon>where_to_vote</mat-icon>      
+          </ng-template>
+          <app-choose-adress [order]="order"></app-choose-adress>
+        </mat-step>
 
-  <mat-step>
-    <ng-template matStepLabel>
-      <mat-icon>event</mat-icon>      
-    </ng-template>
-    <app-choose-date-hour [order]="order"></app-choose-date-hour>
-  </mat-step>
-
-  <mat-step>    
-    <ng-template matStepLabel>
-      <mat-icon>where_to_vote</mat-icon>      
-    </ng-template>
-    <app-choose-adress [order]="order"></app-choose-adress>
-  </mat-step>
-
-</mat-horizontal-stepper>
+      </mat-horizontal-stepper>
+    </mat-card-content>
+  </mat-card>
+</div>

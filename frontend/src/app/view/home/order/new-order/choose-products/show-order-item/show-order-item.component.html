@@ -1,4 +1,15 @@
 <mat-form-field appearance="legacy">
+
+  <img matPrefix src="{{imagePath}}" class="product-image">
+
   <mat-label>{{orderItem.product.name}}</mat-label>
   <input matInput [(ngModel)]="orderItem.amount" name="amount" (change)="changeItemAmount()">
+  <div matSuffix>
+    <button mat-flat-button (click)="minus()">
+      <mat-icon matSuffix color="warn">remove</mat-icon>
+    </button>
+    <button mat-flat-button (click)="plus()">
+      <mat-icon matSuffix class="green">add</mat-icon>
+    </button>
+  </div>
 </mat-form-field>

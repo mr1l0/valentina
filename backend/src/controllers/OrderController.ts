@@ -8,14 +8,13 @@ export class OrderController {
     //private userRepository = getRepository(User);
 
     static async all(request: Request, response: Response, next: NextFunction) {        
-        const orderRepository = getRepository(Order);
-        //return response.send(await orderRepository.find({ relations: ["orderItem", "orderItem.product"] }));
-        console.log(request.params.user_id);
+        const orderRepository = getRepository(Order);        
+        
         let resp = await orderRepository.find({            
             relations: ['orderItem', 'orderItem.product', 'user', 'userAdress'],
             where: { 'user': request.params.user_id }}
         )
-        console.log(resp);
+        
         return response.send(resp);
     }
 

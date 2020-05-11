@@ -16,6 +16,10 @@ export interface Order {
 
     orderItem?: OrderItem[];
 
+    sumAmount?: Number;
+
+    sumValue?: Number;    
+
     createdAt?: Date;
 
     updatedAt?: Date;

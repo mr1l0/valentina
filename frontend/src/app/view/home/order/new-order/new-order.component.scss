@@ -1,4 +1,6 @@
-.mat-step-header {
-    background-color: #db8f39;
-    color: white;
+.content {
+    max-width: 500px;      
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
