@@ -2,13 +2,11 @@ import {getRepository} from "typeorm";
 import {NextFunction, Request, Response} from "express";
 import {Product} from "../entity/Product";
 
-export class ProductController {
-
-    //private productRepository = getRepository(Product);
+export class ProductController {    
 
     static async all(request: Request, response: Response, next: NextFunction) {
         const productRepository = getRepository(Product);
-        return response.send(await productRepository.find());
+        return response.send(await productRepository.find({ relations: ['group'] }));
     }
 
     static async one(request: Request, response: Response, next: NextFunction) {

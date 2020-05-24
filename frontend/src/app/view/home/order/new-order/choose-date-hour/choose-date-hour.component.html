@@ -1,3 +1,4 @@
+
 <div [hidden]="!order.scheduledTo">
   <p>Agendado para {{order.scheduledTo}}</p>
   <button mat-flat-button (click)="clear()" color="primary" class="time-button">
@@ -7,6 +8,7 @@
 </div>
 
 <div [hidden]="order.scheduledTo">
+  <p>Quando devemos entregar seu pedido?</p>
   <p>
     <mat-form-field>
       <mat-label>Data do Pedido</mat-label>

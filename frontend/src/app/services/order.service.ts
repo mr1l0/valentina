@@ -7,6 +7,7 @@ import { Order } from '../model/order';
 import { catchError, retry } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { CalcSumBy } from '../enum/order/calc-sum-by.enum';
+import { OrderTime } from '../model/order-time';
 
 
 @Injectable({
@@ -31,6 +32,13 @@ export class OrderService extends DefaultService {
 
   getAll(): Observable<Order[]> {
     return this.httpClient.get<Order[]>(this.getUrl() + '/' + this.authService.getLoggedUser().id, this.httpOptions).pipe(
+      retry(2),
+      catchError(this.handleError)
+    );
+  }
+
+  getFreHours(date: Date): Observable<OrderTime[]> {
+    return this.httpClient.get<OrderTime[]>(this.getUrl() + '/free-hours/' + date, this.httpOptions).pipe(
       retry(2),
       catchError(this.handleError)
     );

@@ -1,0 +1,10 @@
+<p>
+  Que tal um refrigerante geladinho pra acompanhar?
+</p>
+
+<p class="products" *ngFor="let orderItem of drinks">
+  <app-show-order-item [orderItem]="orderItem" [increment]="1"></app-show-order-item>
+</p>
+<h2> O valor das bebidas é: {{ order.drinksValue | currency:"BRL":"symbol" }}</h2>
+<p><button mat-flat-button matStepperNext color="primary" class="full-input">Avançar</button></p>
+<p><button mat-flat-button matStepperPrevious>Voltar</button></p>

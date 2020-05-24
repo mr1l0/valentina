@@ -1,22 +1,30 @@
-<p>O que você está afim de comer?</p>
+<mat-progress-spinner           
+  *ngIf="!loaded"
+  class="spinner centrelizer"  
+  [mode]="mode">
+</mat-progress-spinner>
 
-<mat-form-field appearance="standard">
-  <mat-label>Quantidade total de salgados</mat-label>
-  <input matInput type="number" autofocus [(ngModel)]="order.sumAmount" name="sumAmount" (change)="onChangeSumAmount()">
-  <div matSuffix> Valor: {{order.sumValue | currency:"BRL":"symbol"}}</div>
-</mat-form-field>
-
-
-
-<mat-divider></mat-divider>
-
-<p class="products" *ngFor="let orderItem of order.orderItem">
-  <app-show-order-item [orderItem]="orderItem"></app-show-order-item>
-</p>
-
-<mat-divider></mat-divider>
-
-<h2> {{order.sumValue | currency:"BRL":"symbol"}}</h2>
-
-<p *ngIf="order.sumAmount < 20" class="warning">Quantidade mínima de salgados é 20. Adicione mais salgados para continuar!</p>
-<button mat-flat-button matStepperNext color="primary" class="button" [disabled]="order.sumAmount < 20">Avançar</button>
+<div *ngIf="loaded">
+  <p>O que você está afim de comer?</p>
+  
+  <mat-form-field appearance="standard">
+    <mat-label>Quantidade total de salgados</mat-label>
+    <input matInput type="number" autofocus [(ngModel)]="order.sumAmount" name="sumAmount" (change)="onChangeSumAmount()">
+    <div matSuffix> Valor: {{order.foodsValue | currency:"BRL":"symbol"}}</div>
+  </mat-form-field>
+  
+  
+  
+  <mat-divider></mat-divider>
+  
+  <p class="products" *ngFor="let orderItem of foods">
+    <app-show-order-item [orderItem]="orderItem"></app-show-order-item>
+  </p>
+  
+  <mat-divider></mat-divider>
+  
+  <h2>O valor dos salgadinhos é: {{order.foodsValue | currency:"BRL":"symbol"}}</h2>
+  
+  <p *ngIf="order.sumAmount < 20" class="warning">Quantidade mínima de salgados é 20. Adicione mais salgados para continuar!</p>
+  <button mat-flat-button matStepperNext color="primary" class="button" [disabled]="order.sumAmount < 20">Avançar</button>
+</div>

@@ -56,7 +56,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     MatExpansionModule,
     MatListModule,
     MatSnackBarModule,
-    TextMaskModule
+    TextMaskModule,
   ],
   exports: [
     CommonModule,

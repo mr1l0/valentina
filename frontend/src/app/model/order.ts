@@ -18,7 +18,9 @@ export interface Order {
 
     sumAmount?: Number;
 
-    sumValue?: Number;    
+    drinksValue?: Number;
+
+    foodsValue?: Number;    
 
     createdAt?: Date;
 

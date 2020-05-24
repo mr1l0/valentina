@@ -6,6 +6,7 @@ import { LoginComponent } from "./view/login/login.component";
 import { JwtModule } from "@auth0/angular-jwt";
 import { HomeModule } from "./view/home/home.module";
 import { SharedModule } from "./shared/shared.module";
+import { CurrencyPipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, NewUserComponent],
@@ -20,7 +21,7 @@ import { SharedModule } from "./shared/shared.module";
       }
     })
   ],
-  providers: [],
+  providers: [ CurrencyPipe ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

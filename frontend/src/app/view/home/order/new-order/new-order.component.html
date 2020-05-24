@@ -11,14 +11,15 @@
             <mat-icon>restaurant</mat-icon>      
           </ng-template>
             
-          <app-choose-products [order]="order"></app-choose-products>
+          <app-choose-products [order]="order" [foods]="foods" [prices]="prices"></app-choose-products>
         </mat-step>
 
         <mat-step >
           <ng-template matStepLabel>
             <mat-icon>local_bar</mat-icon>      
           </ng-template>
-          Alguma bebida senhor? 
+          
+          <app-choose-drinks [order]="order" [drinks]="drinks"></app-choose-drinks>
         </mat-step>
 
         <mat-step>

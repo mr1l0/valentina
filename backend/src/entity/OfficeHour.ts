@@ -4,16 +4,16 @@ import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne
 export class OfficeHour {
 
     @PrimaryGeneratedColumn("uuid")
-    id: string;
+    id?: string;
 
     @Column()
-    weekDay: number;
+    weekDay?: number;
 
     @Column()
-    startHourTurnOne: number;
+    startHourTurnOne?: number;
 
     @Column()
-    endHourTurnOne: number;
+    endHourTurnOne?: number;
 
     @Column()
     startHourTurnTwo?: number;

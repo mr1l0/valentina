@@ -16,6 +16,8 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { HomePageComponent } from './home-page/home-page.component';
 import { ShowOrderComponent } from './order/show-order/show-order.component';
 import { ShowOrderItemComponent } from './order/new-order/choose-products/show-order-item/show-order-item.component';
+import { ChooseDrinksComponent } from './order/new-order/choose-drinks/choose-drinks.component';
+import { FoodFilterPipe } from 'src/app/pipes/food-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { ShowOrderItemComponent } from './order/new-order/choose-products/show-o
     ShowAdressComponent,
     HomePageComponent,
     ShowOrderComponent,
-    ShowOrderItemComponent
+    ShowOrderItemComponent,
+    ChooseDrinksComponent,
+    FoodFilterPipe
   ],
   imports: [SharedModule, CommonModule, HomeRoutingModule],
 })

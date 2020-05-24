@@ -1,5 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany, UpdateDateColumn, CreateDateColumn} from "typeorm";
 import { OrderItem } from "./OrderItem";
+import { ProductGroup } from "./ProductGroup";
 
 @Entity()
 export class Product {
@@ -11,18 +12,22 @@ export class Product {
     name: string;
 
     @Column()
-    description: string;
+    description?: string;
 
     @Column()
     active: boolean;
 
-    @Column()
-    createdAt?: Date;
+    @CreateDateColumn()
+    createdAt: Date;
 
-    @Column()
-    updatedAt?: Date;
+    @UpdateDateColumn()
+    updatedAt: Date;
 
-    @ManyToOne(type => OrderItem, orderItem => orderItem.product)
-    orderItem: OrderItem[];
+    @ManyToOne(type => ProductGroup, productGroup => productGroup.product)
+    group: ProductGroup;
+
+    @Column({ type: "double precision" })
+    price: number;
+
 
 }

@@ -4,6 +4,7 @@ import { OfficeHour } from 'src/app/model/office-hour';
 import { OrderTime } from 'src/app/model/order-time';
 import { Order } from 'src/app/model/order';
 import { MatExpansionPanel } from '@angular/material';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-choose-date-hour',
@@ -14,13 +15,15 @@ import { MatExpansionPanel } from '@angular/material';
 export class ChooseDateHourComponent implements OnInit {
 
   @Input() order: Order;
-
-  semana = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
+  
   data: Date;
   officeHours: OfficeHour[];
   orderTimes: OrderTime[];  
 
-  constructor(protected officeHourService: OfficeHourService) { }
+  constructor(
+    protected officeHourService: OfficeHourService,
+    protected orderService: OrderService  
+  ) { }
 
   ngOnInit() {
     this.getOfficeHours();
@@ -31,15 +34,18 @@ export class ChooseDateHourComponent implements OnInit {
   }
 
   changeDate() {
-    this.orderTimes = [];    
+    this.orderService.getFreHours(this.data).subscribe(orderTimes => this.orderTimes = orderTimes);
 
-    let selectedOfficeHour = this.officeHours.find(day => day.weekDay == this.data.getDay());
-    for (let hour = selectedOfficeHour.startHourTurnOne; hour <= selectedOfficeHour.endHourTurnOne; hour++) {
-      this.appendRequestTime(hour);
-    }
-    for (let hour = selectedOfficeHour.startHourTurnTwo; hour <= selectedOfficeHour.endHourTurnTwo; hour++) {
-      this.appendRequestTime(hour);
-    }
+
+    // this.orderTimes = [];    
+
+    // let selectedOfficeHour = this.officeHours.find(day => day.weekDay == this.data.getDay());
+    // for (let hour = selectedOfficeHour.startHourTurnOne; hour <= selectedOfficeHour.endHourTurnOne; hour++) {
+    //   this.appendRequestTime(hour);
+    // }
+    // for (let hour = selectedOfficeHour.startHourTurnTwo; hour <= selectedOfficeHour.endHourTurnTwo; hour++) {
+    //   this.appendRequestTime(hour);
+    // }
   }
 
   appendRequestTime(hour: number) {

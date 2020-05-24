@@ -12,6 +12,12 @@ import { OrderController } from "../controllers/OrderController";
     OrderController.one
   );
 
+  router.get(
+    "/free-hours/:date",
+    [checkJwt],
+    OrderController.freeHours
+  );  
+
   router.post("/", [checkJwt], OrderController.save);
 
   router.delete(

@@ -29,4 +29,14 @@ export class Order {
 
     @UpdateDateColumn()
     updatedAt: Date;    
+
+    @Column()
+    sumAmount?: Number;
+
+    @Column({ type: "double precision" })
+    drinksValue?: Number;
+
+    @Column({ type: "double precision" })
+    foodsValue?: Number;    
+
 }

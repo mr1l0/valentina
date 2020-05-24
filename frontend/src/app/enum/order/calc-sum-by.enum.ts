@@ -1,4 +1,5 @@
 export enum CalcSumBy {
     itemAmount,
-    sumAmount
+    sumAmount,
+    drinks
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { OrderItem } from 'src/app/model/order-item';
 import { OrderService } from 'src/app/services/order.service';
 import { CalcSumBy } from 'src/app/enum/order/calc-sum-by.enum';
@@ -12,8 +11,11 @@ import { CalcSumBy } from 'src/app/enum/order/calc-sum-by.enum';
 export class ShowOrderItemComponent implements OnInit {
 
   @Input() orderItem: OrderItem;  
+  @Input() increment: number = 5;
 
   imagePath: string;
+
+  CalcSumBy = CalcSumBy;
 
   constructor(private orderService: OrderService) { }
 
@@ -21,21 +23,22 @@ export class ShowOrderItemComponent implements OnInit {
     this.imagePath  = `./../../assets/products/${this.orderItem.product.name}.png`;
   }  
 
-  changeItemAmount() {
-    this.orderService.calc.emit(CalcSumBy.itemAmount);
+  changeItemAmount(calcSumBy: CalcSumBy) {
+    console.log(calcSumBy);
+    this.orderService.calc.emit(calcSumBy);
   }
 
-  plus() {
-    this.orderItem.amount = this.orderItem.amount + 5;
-    this.changeItemAmount();
+  plus(calcSumBy: CalcSumBy) {
+    this.orderItem.amount = this.orderItem.amount + this.increment;
+    this.changeItemAmount(calcSumBy);
   }
 
-  minus() {
-    this.orderItem.amount = this.orderItem.amount - 5;
+  minus(calcSumBy: CalcSumBy) {
+    this.orderItem.amount = this.orderItem.amount - this.increment;
     if(this.orderItem.amount < 0){
       this.orderItem.amount = 0;
     }
-    this.changeItemAmount();
+    this.changeItemAmount(calcSumBy);
   }
 
 }
