@@ -35,17 +35,6 @@ export class ChooseDateHourComponent implements OnInit {
 
   changeDate() {
     this.orderService.getFreHours(this.data).subscribe(orderTimes => this.orderTimes = orderTimes);
-
-
-    // this.orderTimes = [];    
-
-    // let selectedOfficeHour = this.officeHours.find(day => day.weekDay == this.data.getDay());
-    // for (let hour = selectedOfficeHour.startHourTurnOne; hour <= selectedOfficeHour.endHourTurnOne; hour++) {
-    //   this.appendRequestTime(hour);
-    // }
-    // for (let hour = selectedOfficeHour.startHourTurnTwo; hour <= selectedOfficeHour.endHourTurnTwo; hour++) {
-    //   this.appendRequestTime(hour);
-    // }
   }
 
   appendRequestTime(hour: number) {
