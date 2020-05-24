@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { OfficeHourService } from 'src/app/services/office-hour.service';
 import { OfficeHour } from 'src/app/model/office-hour';
 import { OrderTime } from 'src/app/model/order-time';
 import { Order } from 'src/app/model/order';
@@ -20,17 +19,12 @@ export class ChooseDateHourComponent implements OnInit {
   officeHours: OfficeHour[];
   orderTimes: OrderTime[];  
 
-  constructor(
-    protected officeHourService: OfficeHourService,
+  constructor(    
     protected orderService: OrderService  
   ) { }
 
   ngOnInit() {
-    this.getOfficeHours();
-  }
 
-  getOfficeHours() {
-    this.officeHourService.getAll().subscribe(officeHours => this.officeHours = officeHours);
   }
 
   changeDate() {
