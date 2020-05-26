@@ -1,4 +1,4 @@
-import {getRepository} from "typeorm";
+import {getRepository, ConnectionOptions} from "typeorm";
 import {NextFunction, Request, Response} from "express";
 import {Order} from "../entity/Order";
 import { OrderItem } from "../entity/OrderItem";
@@ -20,26 +20,60 @@ export class OrderController {
         return response.send(resp);
     }
     
-    static async freeHours(request: Request, response: Response, next: NextFunction) {
-        let data: Date = new Date(request.params.date);
+    static async freeHours(request: Request, response: Response, next: NextFunction) {        
+        let data: Date = new Date(request.params.date);        
 
-        const officeHourRepository = getRepository(OfficeHour);
-        const orderRepository = getRepository(Order);        
+        const day = data.getDate();
+        const month = data.getMonth() + 1;
+        const year = data.getFullYear();        
+
+        const minutes = [0, 15, 30, 45]
+
+        const officeHourRepository = getRepository(OfficeHour);        
+        const orderRepository = await getRepository(Order).createQueryBuilder('order')
+            .select('order.scheduledTo, count(1) as countN')
+            .groupBy('order.scheduledTo')
+            .where(`order.scheduledTo BETWEEN '${year}-${month}-${day} 00:00:00' and '${year}-${month}-${day} 23:59:59'`)
+            .getRawMany();
+        console.log(orderRepository);
         
         let officeHour: OfficeHour = await officeHourRepository.findOne({ where: { 'weekDay': data.getDay() }});
 
         let freeHours: OrderTime[] = [];
 
         for (let hour = officeHour.startHourTurnOne; hour <= officeHour.endHourTurnOne; hour++) {
-            freeHours.push({ hour, minutes: [ 0, 15, 30, 45 ]});
-        }
-        for (let hour = officeHour.startHourTurnTwo; hour <= officeHour.endHourTurnTwo; hour++) {
-            freeHours.push({ hour, minutes: [ 0, 15, 30, 45 ]});
+            let minutesToAdd: Number[] = [];
+            await minutes.forEach(async minute => {  
+                let orderCount = await orderRepository.find(time => time.scheduledTo.getHours() == hour && time.scheduledTo.getMinutes() == minute);
+                if((orderCount == undefined) ||  (orderCount.countN < 2)){
+                
+                    minutesToAdd.push(minute);
+                }
+            })
+            console.log(minutesToAdd);
+            if(minutesToAdd.length > 0) {
+                freeHours.push({ hour, minutes: minutesToAdd});            
+            }
         }
         
-        let resp = await orderRepository.find({                    
-           where: { 'user': request.params.user_id }}
-        )
+        for (let hour = officeHour.startHourTurnTwo; hour <= officeHour.endHourTurnTwo; hour++) {
+            let minutesToAdd: Number[] = [];
+            await minutes.forEach(async minute => {  
+                let orderCount = await orderRepository.find(time => time.scheduledTo.getHours() == hour && time.scheduledTo.getMinutes() == minute);
+                if((orderCount == undefined) ||  (orderCount.countN < 2)){
+                
+                    minutesToAdd.push(minute);
+                }
+            })
+            console.log(minutesToAdd);
+            if(minutesToAdd.length > 0) {
+                freeHours.push({ hour, minutes: minutesToAdd});            
+            }
+        }
+        
+        // let resp = await orderRepository.find({                    
+        //    where: { 'user': request.params.user_id }}
+        // )
         
         return response.send(freeHours);
     }
