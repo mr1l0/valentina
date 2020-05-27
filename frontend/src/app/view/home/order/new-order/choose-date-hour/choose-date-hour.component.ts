@@ -2,14 +2,19 @@ import { Component, OnInit, Input } from '@angular/core';
 import { OfficeHour } from 'src/app/model/office-hour';
 import { OrderTime } from 'src/app/model/order-time';
 import { Order } from 'src/app/model/order';
-import { MatExpansionPanel } from '@angular/material';
+import { MatExpansionPanel, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 import { OrderService } from 'src/app/services/order.service';
+import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/helper/format-datepicker';
 
 @Component({
   selector: 'app-choose-date-hour',
   templateUrl: './choose-date-hour.component.html',
   styleUrls: ['./choose-date-hour.component.scss'],
-  viewProviders: [MatExpansionPanel]
+  viewProviders: [MatExpansionPanel],
+  providers: [
+    {provide: DateAdapter, useClass: AppDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+  ]
 })
 export class ChooseDateHourComponent implements OnInit {
 

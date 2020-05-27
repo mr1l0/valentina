@@ -1,6 +1,6 @@
 
 <div [hidden]="!order.scheduledTo">
-  <p>Agendado para {{order.scheduledTo}}</p>
+  <p>Agendado para {{order.scheduledTo | date: 'dd/MM/yyyy HH:mm'}}</p>
   <button mat-flat-button (click)="clear()" color="primary" class="time-button">
     Trocar data de entrega
   </button>
@@ -12,14 +12,15 @@
   <p>
     <mat-form-field>
       <mat-label>Data do Pedido</mat-label>
-      <input matInput autofocus [(ngModel)]="data" [matDatepicker]="picker" (dateChange)="changeDate()">
+      <input matInput autofocus [(ngModel)]="data" [matDatepicker]="picker" readonly (dateChange)="changeDate()">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
     </mat-form-field>
   </p>
 
 
-  <mat-accordion>
+  <mat-accordion *ngIf="orderTimes">
+    <p>Abaixo estão os horários disponíveis nessa</p>
     <mat-expansion-panel *ngFor="let orderTime of orderTimes">
       <mat-expansion-panel-header>
         <mat-panel-title>

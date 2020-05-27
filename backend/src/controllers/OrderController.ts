@@ -7,7 +7,6 @@ import { OrderTime } from "../models/OrderTime";
 
 export class OrderController {
 
-    //private userRepository = getRepository(User);
 
     static async all(request: Request, response: Response, next: NextFunction) {        
         const orderRepository = getRepository(Order);        
@@ -21,12 +20,11 @@ export class OrderController {
     }
     
     static async freeHours(request: Request, response: Response, next: NextFunction) {        
+        
         let data: Date = new Date(request.params.date);        
-
         const day = data.getDate();
         const month = data.getMonth() + 1;
         const year = data.getFullYear();        
-
         const minutes = [0, 15, 30, 45]
 
         const officeHourRepository = getRepository(OfficeHour);        
@@ -34,13 +32,12 @@ export class OrderController {
             .select('order.scheduledTo, count(1) as countN')
             .groupBy('order.scheduledTo')
             .where(`order.scheduledTo BETWEEN '${year}-${month}-${day} 00:00:00' and '${year}-${month}-${day} 23:59:59'`)
-            .getRawMany();
-        console.log(orderRepository);
+            .getRawMany();        
         
         let officeHour: OfficeHour = await officeHourRepository.findOne({ where: { 'weekDay': data.getDay() }});
-
         let freeHours: OrderTime[] = [];
 
+        // TO-DO Unificar o FOR e extrair em método
         for (let hour = officeHour.startHourTurnOne; hour <= officeHour.endHourTurnOne; hour++) {
             let minutesToAdd: Number[] = [];
             await minutes.forEach(async minute => {  
@@ -49,13 +46,11 @@ export class OrderController {
                 
                     minutesToAdd.push(minute);
                 }
-            })
-            console.log(minutesToAdd);
+            })            
             if(minutesToAdd.length > 0) {
                 freeHours.push({ hour, minutes: minutesToAdd});            
             }
         }
-        
         for (let hour = officeHour.startHourTurnTwo; hour <= officeHour.endHourTurnTwo; hour++) {
             let minutesToAdd: Number[] = [];
             await minutes.forEach(async minute => {  
@@ -70,10 +65,6 @@ export class OrderController {
                 freeHours.push({ hour, minutes: minutesToAdd});            
             }
         }
-        
-        // let resp = await orderRepository.find({                    
-        //    where: { 'user': request.params.user_id }}
-        // )
         
         return response.send(freeHours);
     }
