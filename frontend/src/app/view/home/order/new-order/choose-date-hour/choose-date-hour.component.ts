@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { OfficeHour } from 'src/app/model/office-hour';
 import { OrderTime } from 'src/app/model/order-time';
 import { Order } from 'src/app/model/order';
-import { MatExpansionPanel, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { MatExpansionPanel, DateAdapter, MAT_DATE_FORMATS, MatDatepicker } from '@angular/material';
 import { OrderService } from 'src/app/services/order.service';
 import { AppDateAdapter, APP_DATE_FORMATS } from 'src/app/helper/format-datepicker';
 
@@ -21,18 +21,27 @@ export class ChooseDateHourComponent implements OnInit {
   @Input() order: Order;
   
   data: Date;
+  
   officeHours: OfficeHour[];
-  orderTimes: OrderTime[];  
+  orderTimes: OrderTime[];
+
+  freeTime: boolean = false;
 
   constructor(    
     protected orderService: OrderService  
   ) { }
 
-  ngOnInit() {
+  myFilter = (d: Date | null): boolean => {
+    const day = (d || new Date());
+    return day >= (new Date(Date.now()-100000000));
+  }
 
+  ngOnInit() {    
   }
 
   changeDate() {
+    this.orderTimes = [];
+
     this.orderService.getFreHours(this.data).subscribe(orderTimes => this.orderTimes = orderTimes);
   }
 

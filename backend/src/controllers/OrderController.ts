@@ -18,10 +18,15 @@ export class OrderController {
         
         return response.send(resp);
     }
+
+    static dateEqual(dateA, dateB: Date): boolean {        
+        return ((dateA.getDate() + '/' + dateA.getMonth() + '/' + dateA.getFullYear() ) == (dateB.getDate() + '/' + dateB.getMonth() + '/' + dateB.getFullYear()))
+    }
     
     static async freeHours(request: Request, response: Response, next: NextFunction) {        
-        
-        let data: Date = new Date(request.params.date);        
+        const today: Date = new Date(Date.now());
+        const todayHour = today.getHours();
+        const data: Date = new Date(request.params.date);        
         const day = data.getDate();
         const month = data.getMonth() + 1;
         const year = data.getFullYear();        
@@ -47,7 +52,7 @@ export class OrderController {
                     minutesToAdd.push(minute);
                 }
             })            
-            if(minutesToAdd.length > 0) {
+            if( minutesToAdd.length > 0 && (!OrderController.dateEqual(data, today) || hour > todayHour + 1)) {
                 freeHours.push({ hour, minutes: minutesToAdd});            
             }
         }
@@ -61,7 +66,7 @@ export class OrderController {
                 }
             })
             console.log(minutesToAdd);
-            if(minutesToAdd.length > 0) {
+            if(minutesToAdd.length > 0 && (!OrderController.dateEqual(data, today) || hour > todayHour + 1)) {
                 freeHours.push({ hour, minutes: minutesToAdd});            
             }
         }

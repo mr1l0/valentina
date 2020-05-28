@@ -1,0 +1,12 @@
+<mat-card class="card">    
+  <mat-card-content class="content">
+    <p>Valor dos salgados</p>
+    <h2>{{ order.foodsValue  | currency:"BRL":"symbol" }}</h2>   
+    <mat-divider></mat-divider> 
+    <br>
+    <p>Valor das bebidas</p>
+    <h2>{{ order.drinksValue | currency:"BRL":"symbol" }}</h2>
+  </mat-card-content>
+</mat-card>
+
+<button mat-flat-button color="primary" (click)="submit()" class="full-input">Finalizar Pedido</button>

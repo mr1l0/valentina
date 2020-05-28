@@ -12,7 +12,7 @@
   <p>
     <mat-form-field>
       <mat-label>Data do Pedido</mat-label>
-      <input matInput autofocus [(ngModel)]="data" [matDatepicker]="picker" readonly (dateChange)="changeDate()">
+      <input matInput autofocus [matDatepickerFilter]="myFilter" [(ngModel)]="data" [matDatepicker]="picker" readonly (dateChange)="changeDate()">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker disabled="false"></mat-datepicker>
     </mat-form-field>
@@ -20,7 +20,8 @@
 
 
   <mat-accordion *ngIf="orderTimes">
-    <p>Abaixo estão os horários disponíveis nessa</p>
+    <p *ngIf="orderTimes.length > 0">Abaixo estão os horários disponíveis no dia  {{data | date: 'dd/MM/yyyy'}}</p>
+    <p *ngIf="orderTimes.length == 0">Perdão, não temos horário disponível no dia {{data | date: 'dd/MM/yyyy'}}, tente selecionar outra data</p>
     <mat-expansion-panel *ngFor="let orderTime of orderTimes">
       <mat-expansion-panel-header>
         <mat-panel-title>

@@ -18,6 +18,7 @@ import { ShowOrderComponent } from './order/show-order/show-order.component';
 import { ShowOrderItemComponent } from './order/new-order/choose-products/show-order-item/show-order-item.component';
 import { ChooseDrinksComponent } from './order/new-order/choose-drinks/choose-drinks.component';
 import { FoodFilterPipe } from 'src/app/pipes/food-filter.pipe';
+import { DataConfirmationComponent } from './order/new-order/data-confirmation/data-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { FoodFilterPipe } from 'src/app/pipes/food-filter.pipe';
     ShowOrderComponent,
     ShowOrderItemComponent,
     ChooseDrinksComponent,
-    FoodFilterPipe
+    FoodFilterPipe,
+    DataConfirmationComponent
   ],
   imports: [SharedModule, CommonModule, HomeRoutingModule],
 })
